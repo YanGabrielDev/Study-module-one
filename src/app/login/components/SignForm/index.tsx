@@ -45,6 +45,7 @@ export const SignForm = ({ openSignUpForm }: SignFormProps) => {
                 <Button
                     className="bg-grayMedium hover:bg-grayMedium/50"
                     onClick={openSignUpForm}
+                    type="submit"
                 >
                     <span className="font-normal text-white">Criar conta</span>
                 </Button>
