@@ -6,13 +6,21 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { Form } from '@/components/ui/form'
 import { LoginFormData } from "@/interfaces/loginForm.interface"
 import { userLogin, userRegister } from "@/services/login.service"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { registerFormSchema } from "@/schemas/registerFormSchema"
+import { loginFormSchema } from "@/schemas/loginFormSchema"
 
 interface LoginForm {
 }
 
 export const LoginForm = ({ }: LoginForm) => {
     const [showSignUpForm, setShowSignUpform] = useState(false)
-    const form = useForm()
+    const schema = showSignUpForm ? registerFormSchema : loginFormSchema
+    const form = useForm(
+        {
+            resolver: zodResolver(schema),
+        }
+    )
 
     const openSignUpForm = () => { setShowSignUpform(true), form.reset() }
 
@@ -38,13 +46,14 @@ export const LoginForm = ({ }: LoginForm) => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} >
+            <form onSubmit={form.handleSubmit((data) => onSubmit(data)
+            )} >
                 {showSignUpForm
                     ? <SignUpForm closeSignUpForm={closeSignUpForm} />
                     : <SignForm openSignUpForm={openSignUpForm} />
                 }
             </form>
-        </Form>
+        </Form >
 
     )
 }
