@@ -16,6 +16,7 @@ export const SignUpForm = ({ closeSignUpForm }: SignUpFormProps) => {
             <FormField
                 control={form.control}
                 name="user_name"
+                rules={{ required: "Campo obrigatório!" }}
                 render={({ field }) => (
                     <FormItem>
                         <FormControl>
@@ -28,6 +29,7 @@ export const SignUpForm = ({ closeSignUpForm }: SignUpFormProps) => {
             <FormField
                 control={form.control}
                 name="user_email"
+                rules={{ required: "Campo obrigatório!" }}
                 render={({ field }) => (
                     <FormItem>
                         <FormControl>
@@ -40,6 +42,7 @@ export const SignUpForm = ({ closeSignUpForm }: SignUpFormProps) => {
             <FormField
                 control={form.control}
                 name="user_password"
+                rules={{ required: "Campo obrigatório!" }}
                 render={({ field }) => (
                     <FormItem>
                         <FormControl>
@@ -52,6 +55,7 @@ export const SignUpForm = ({ closeSignUpForm }: SignUpFormProps) => {
             <FormField
                 control={form.control}
                 name="user_confirm_password"
+                rules={{ required: "Campo obrigatório!" }}
                 render={({ field }) => (
                     <FormItem>
                         <FormControl>

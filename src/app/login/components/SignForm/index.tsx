@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
+import { FormControl, FormField, FormItem, FormMessage, } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useFormContext } from "react-hook-form"
 
@@ -8,6 +8,9 @@ interface SignFormProps {
 }
 export const SignForm = ({ openSignUpForm }: SignFormProps) => {
     const form = useFormContext()
+    const { errors } = form.formState
+    console.log(errors);
+
     return (
         <div className="w-full flex gap-4 flex-col min-w-80">
             <h1 className="font-bold text-white text-5xl">Login</h1>
@@ -15,6 +18,7 @@ export const SignForm = ({ openSignUpForm }: SignFormProps) => {
             <FormField
                 control={form.control}
                 name="user_email"
+                rules={{ required: "Campo obrigatório!" }}
                 render={({ field }) => (
                     <FormItem>
                         <FormControl>
@@ -27,6 +31,7 @@ export const SignForm = ({ openSignUpForm }: SignFormProps) => {
             <FormField
                 control={form.control}
                 name="user_password"
+                rules={{ required: "Campo obrigatório!" }}
                 render={({ field }) => (
                     <FormItem>
                         <FormControl>
