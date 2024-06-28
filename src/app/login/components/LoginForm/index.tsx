@@ -15,6 +15,7 @@ interface LoginForm {
 
 export const LoginForm = ({ }: LoginForm) => {
     const [showSignUpForm, setShowSignUpform] = useState(false)
+    const [isLoadingSubmit, setIsLoadingSubmit] = useState(false)
     const schema = showSignUpForm ? registerFormSchema : loginFormSchema
     const form = useForm(
         {
@@ -29,8 +30,8 @@ export const LoginForm = ({ }: LoginForm) => {
     const onSubmit: SubmitHandler<LoginFormData> = async (formData) => {
         try {
             const { user_confirm_password, user_email, user_name, user_password } = formData
-
-            showSignUpForm ? await userRegister({
+            setIsLoadingSubmit(true)
+            const data = showSignUpForm ? await userRegister({
                 confirmPassword: user_confirm_password ?? '',
                 email: user_email ?? '',
                 name: user_name ?? '',
@@ -39,8 +40,11 @@ export const LoginForm = ({ }: LoginForm) => {
                 email: user_email ?? '',
                 password: user_password ?? ''
             });
+            console.log(data);
+            setIsLoadingSubmit(false)
         } catch (error) {
             console.error(error);
+            setIsLoadingSubmit(false)
         }
     }
 
@@ -49,8 +53,8 @@ export const LoginForm = ({ }: LoginForm) => {
             <form onSubmit={form.handleSubmit((data) => onSubmit(data)
             )} >
                 {showSignUpForm
-                    ? <SignUpForm closeSignUpForm={closeSignUpForm} />
-                    : <SignForm openSignUpForm={openSignUpForm} />
+                    ? <SignUpForm closeSignUpForm={closeSignUpForm} isLoadingSubmit={isLoadingSubmit} />
+                    : <SignForm openSignUpForm={openSignUpForm} isLoadingSubmit={isLoadingSubmit} />
                 }
             </form>
         </Form >
