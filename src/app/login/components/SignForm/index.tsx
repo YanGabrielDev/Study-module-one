@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/button"
 import { FormControl, FormField, FormItem, FormMessage, } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useFormContext } from "react-hook-form"
+import { Loader2 } from "lucide-react"
 
 interface SignFormProps {
     openSignUpForm: () => void
+    isLoadingSubmit: boolean
 }
-export const SignForm = ({ openSignUpForm }: SignFormProps) => {
+export const SignForm = ({ openSignUpForm, isLoadingSubmit }: SignFormProps) => {
     const form = useFormContext()
-    const { errors } = form.formState
-    console.log(errors);
 
     return (
         <div className="w-full flex gap-4 flex-col min-w-80">
@@ -42,13 +42,14 @@ export const SignForm = ({ openSignUpForm }: SignFormProps) => {
                 )}
             />
             <h2 className="text-white text-base opacity-50 font-normal">Esqueceu sua senha?</h2>
-            <Button className="bg-primary">
+            <Button disabled={isLoadingSubmit}>
+                {isLoadingSubmit && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 <span className="font-normal text-white">Login</span>
             </Button>
             <div className="flex w-full justify-between items-center absolute bottom-10 max-w-80">
                 <span className="text-white text-base opacity-50 font-normal">Não possui conta?</span>
                 <Button
-                    className="bg-grayMedium hover:bg-grayMedium/50"
+                    variant="secondary"
                     onClick={openSignUpForm}
                     type="submit"
                 >
