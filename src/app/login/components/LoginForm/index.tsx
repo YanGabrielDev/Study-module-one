@@ -45,14 +45,15 @@ export const LoginForm = ({ }: LoginForm) => {
 
             if (data?.status === 200) {
                 if (showSignUpForm) {
-                    setShowSignUpform(false)
+                    closeSignUpForm()
                     return
                 }
                 route.push('/')
             }
-            setIsLoadingSubmit(false)
         } catch (error) {
             console.error(error);
+            setIsLoadingSubmit(false)
+        } finally {
             setIsLoadingSubmit(false)
         }
     }
