@@ -4,7 +4,7 @@ import { api } from "@/lib/api"
 export const userLogin = async (data: LoginData) => {
     try {
         const response = await api.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/login`, data, {
-            //  withCredentials: true 
+            // withCredentials: true
         })
         return response
     } catch (error) {
