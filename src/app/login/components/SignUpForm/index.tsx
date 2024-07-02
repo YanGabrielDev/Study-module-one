@@ -45,7 +45,7 @@ export const SignUpForm = ({ closeSignUpForm, isLoadingSubmit }: SignUpFormProps
                 />
             ))}
 
-            <Button disabled={isLoadingSubmit}>
+            <Button disabled={isLoadingSubmit} type="submit">
                 {isLoadingSubmit && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 <span className="font-normal text-white">Registrar</span>
             </Button>
@@ -53,7 +53,6 @@ export const SignUpForm = ({ closeSignUpForm, isLoadingSubmit }: SignUpFormProps
             <div className={`flex w-full justify-between items-center absolute bottom-10 max-w-80`}>
                 <span className="text-white text-base opacity-50 font-normal">Já possui conta?</span>
                 <Button variant="secondary" onClick={closeSignUpForm}>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     <span className="font-normal text-white">Faça login</span>
                 </Button>
             </div>
