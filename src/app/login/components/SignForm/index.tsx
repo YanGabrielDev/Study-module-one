@@ -42,7 +42,7 @@ export const SignForm = ({ openSignUpForm, isLoadingSubmit }: SignFormProps) => 
                 )}
             />
             <h2 className="text-white text-base opacity-50 font-normal">Esqueceu sua senha?</h2>
-            <Button disabled={isLoadingSubmit}>
+            <Button disabled={isLoadingSubmit} type="submit">
                 {isLoadingSubmit && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 <span className="font-normal text-white">Login</span>
             </Button>
@@ -51,7 +51,6 @@ export const SignForm = ({ openSignUpForm, isLoadingSubmit }: SignFormProps) => 
                 <Button
                     variant="secondary"
                     onClick={openSignUpForm}
-                    type="submit"
                 >
                     <span className="font-normal text-white">Criar conta</span>
                 </Button>

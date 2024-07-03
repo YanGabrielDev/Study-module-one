@@ -9,6 +9,7 @@ import { userLogin, userRegister } from "@/services/login.service"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { registerFormSchema } from "@/schemas/registerFormSchema"
 import { loginFormSchema } from "@/schemas/loginFormSchema"
+import { useRouter } from "next/navigation"
 
 interface LoginForm {
 }
@@ -16,6 +17,7 @@ interface LoginForm {
 export const LoginForm = ({ }: LoginForm) => {
     const [showSignUpForm, setShowSignUpform] = useState(false)
     const [isLoadingSubmit, setIsLoadingSubmit] = useState(false)
+    const route = useRouter()
     const schema = showSignUpForm ? registerFormSchema : loginFormSchema
     const form = useForm(
         {
@@ -40,10 +42,18 @@ export const LoginForm = ({ }: LoginForm) => {
                 email: user_email ?? '',
                 password: user_password ?? ''
             });
-            console.log(data);
-            setIsLoadingSubmit(false)
+
+            if (data?.status === 200) {
+                if (showSignUpForm) {
+                    closeSignUpForm()
+                    return
+                }
+                route.push('/')
+            }
         } catch (error) {
             console.error(error);
+            setIsLoadingSubmit(false)
+        } finally {
             setIsLoadingSubmit(false)
         }
     }
