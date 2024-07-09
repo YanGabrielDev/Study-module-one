@@ -11,12 +11,15 @@ export const Sidebar = () => {
 
     return (
         <>
-            <div className={`h-screen  w-full ${openSidebar ? 'w-60' : 'w-24'} transition-all p-6 bg-darkGray rounded-xl relative`}>
-                <div className="w-full flex items-center justify-between relative">
-                    <SidebarHeader userName="Naruto" />
-                    <SidebarCollapsedButton onClick={handleChangeOpenSidebar} />
+            <div className={`h-screen ${openSidebar ? 'w-60' : 'w-24'} transition-all bg-darkGray rounded-r-md relative`}>
+                <div className="w-full flex items-center justify-between relative p-6 pb-0 flex-col">
+                    <div className="flex w-full relative">
+                        <SidebarHeader userName="Naruto" />
+                        <SidebarCollapsedButton onClick={handleChangeOpenSidebar} />
+                    </div>
+                    <Separator className="my-4 bg-white opacity-20" />
                 </div>
-                <Separator className="my-4 bg-white opacity-20" />
+                <button><span className="text-white">Opa</span></button>
             </div>
         </>
     )
