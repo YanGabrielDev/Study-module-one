@@ -10,6 +10,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { registerFormSchema } from "@/schemas/registerFormSchema"
 import { loginFormSchema } from "@/schemas/loginFormSchema"
 import { useRouter } from "next/navigation"
+import { useLocalStorage } from "@/hooks/useLocalStorage"
+import { USER_KEY } from "@/constants/localStorageKeys.constants"
 
 interface LoginForm {
 }
@@ -24,6 +26,7 @@ export const LoginForm = ({ }: LoginForm) => {
             resolver: zodResolver(schema),
         }
     )
+    const { setLocalStorageItem } = useLocalStorage(USER_KEY)
 
     const openSignUpForm = () => { setShowSignUpform(true), form.reset() }
 
@@ -33,7 +36,7 @@ export const LoginForm = ({ }: LoginForm) => {
         try {
             const { user_confirm_password, user_email, user_name, user_password } = formData
             setIsLoadingSubmit(true)
-            const data = showSignUpForm ? await userRegister({
+            const response = showSignUpForm ? await userRegister({
                 confirmPassword: user_confirm_password ?? '',
                 email: user_email ?? '',
                 name: user_name ?? '',
@@ -43,7 +46,9 @@ export const LoginForm = ({ }: LoginForm) => {
                 password: user_password ?? ''
             });
 
-            if (data?.status === 200) {
+            setLocalStorageItem(response?.data)
+
+            if (response?.status === 200) {
                 if (showSignUpForm) {
                     closeSignUpForm()
                     return
