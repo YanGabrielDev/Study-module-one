@@ -15,12 +15,12 @@ export const Sidebar = () => {
     const { getLocalStorageItem } = useLocalStorage(USER_KEY)
     const { modules } = getLocalStorageItem()
     const handleChangeOpenSidebar = () => setOpenSidebar(!openSidebar)
-    console.log(modules);
+    const userModules = Object.values(modules as string).filter(module => module !== "Study Manager")
 
     return (
         <>
-            <div className={`h-screen ${openSidebar ? 'w-60' : 'w-24'} transition-all bg-darkGray rounded-r-md relative`}>
-                <div className="w-full flex items-center justify-between relative p-6 pb-0 flex-col">
+            <div className={`h-screen ${openSidebar ? 'w-60' : 'w-20'} transition-all bg-darkGray rounded-r-md relative`}>
+                <div className="w-full flex items-center justify-between relative p-4 pb-0 pt-5 flex-col">
                     <div className="flex w-full relative">
                         <SidebarHeader userName="Naruto" />
                         <SidebarCollapsedButton onClick={handleChangeOpenSidebar} />
@@ -28,12 +28,12 @@ export const Sidebar = () => {
                     <Separator className="my-4 bg-white opacity-20" />
                 </div>
                 <ul>
-                    {modules?.map((module: "Study Timer") => (
+                    {userModules?.map((module) => (
                         <SidebarItem>
                             <Link
-                                className="no-underline text-white whitespace-nowrap flex gap-6"
+                                className="no-underline text-white whitespace-nowrap flex gap-5 items-center"
                                 href={MENU_MODULES[module] ?? ''}
-                                target="_blank">{MODULE_ICONS[module]} {module}</Link>
+                                target="_blank"><div>{MODULE_ICONS[module]}</div> {module}</Link>
                         </SidebarItem>
                     ))}
                 </ul>
