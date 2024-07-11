@@ -4,5 +4,5 @@ interface SidebarItemProps {
     children: ReactNode
 }
 export const SidebarItem = ({ children }: SidebarItemProps) => {
-    return <li className="px-6">{children}</li>
+    return <li className="px-5">{children}</li>
 }
